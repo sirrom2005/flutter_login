@@ -1,4 +1,4 @@
 # Stinga login
 
-Stinga login page, redon in using Flutter
+Stinga login page, redone in using Flutter
 
