@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login/UI/login.dart';
+import 'package:login/UI/Home/DashBoard.dart';
+import 'package:login/UI/Login/login.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,11 +9,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Stinga',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.blue,
       ),
-      home: Login(),
+      //home: Login(),
+      home: DashBoard(),
     );
   }
 }
