@@ -3,12 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:login/UI/Home/JobList.dart';
 
 class DashBoard extends StatefulWidget {
+  static const String id = 'dashborad';
+  final String obj;
+
+  DashBoard({this.obj});
+
   @override
-  _DashBoardState createState() =>_DashBoardState();
+  _DashBoardState createState() =>_DashBoardState(obj);
 }
     
 class _DashBoardState extends State<DashBoard> 
 {
+  final String obj;
+
+  _DashBoardState(this.obj);
+
   List<Map<String, Object>> jobObject = 
                             [
                               {
@@ -41,10 +50,11 @@ class _DashBoardState extends State<DashBoard>
                               }
                             ];
 
-
   @override
   Widget build(BuildContext context) 
   {
+    print(">>>");
+    print(obj);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

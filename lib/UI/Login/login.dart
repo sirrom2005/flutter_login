@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login/Models/Account.dart';
 import 'package:login/Services/Services.dart';
+import 'package:login/UI/Home/DashBoard.dart';
 
 class Login extends StatefulWidget{
+  static const String id = 'login';
+
   @override
   _LoginState createState() => _LoginState();
 }
@@ -13,16 +16,21 @@ class _LoginState extends State<Login>
   Future<Account> _futureLogin;
   final _formKey = GlobalKey<FormState>();
 
-  int count = 0;
   String _email = '';
   String _password = ''; 
 
-  submitLogin(){
+  submitLogin() async{
     if (_formKey.currentState.validate()) {
-      print('$_email >> $_password >> $count');
-      count++;
-
-      _futureLogin = Services().login(_email, _password);
+      try {
+        final _futureLogin = await Services().login(_email.trim(), _password.trim());
+        if(_futureLogin != null ){
+          Navigator.pushNamed(context, DashBoard.id, arguments: {"hello sue"});
+        }else{
+          return Text('HHHH\nMMMMM');
+        }
+      }catch(e){
+        print('[Erro] => $e');
+      }
     }
   }
 
@@ -69,6 +77,7 @@ class _LoginState extends State<Login>
                         children: <Widget>[
                           TextFormField(
                             keyboardType: TextInputType.emailAddress,
+                            initialValue: 'demo@demo.com',
                             decoration: InputDecoration(
                               labelText: 'Email',
                               hintText: 'name@domain.com'
@@ -88,6 +97,7 @@ class _LoginState extends State<Login>
                             decoration: InputDecoration(
                                 labelText: 'Password'
                             ),
+                            initialValue: 'password',
                             onChanged: (String e){
                               _password = e;
                             },
@@ -117,7 +127,7 @@ class _LoginState extends State<Login>
                               onPressed:(){
                                 setState(() {
                                   submitLogin();
-                                });                               
+                                });
                               } ,
                             ),
                           )
