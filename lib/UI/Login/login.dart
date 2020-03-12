@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login/Models/Account.dart';
+import 'package:login/Models/JobItem.dart';
 import 'package:login/Services/Services.dart';
 import 'package:login/UI/Home/DashBoard.dart';
 
@@ -13,7 +14,6 @@ class Login extends StatefulWidget{
 
 class _LoginState extends State<Login>
 {
-  Future<Account> _futureLogin;
   final _formKey = GlobalKey<FormState>();
 
   String _email = '';
@@ -22,9 +22,10 @@ class _LoginState extends State<Login>
   submitLogin() async{
     if (_formKey.currentState.validate()) {
       try {
-        final _futureLogin = await Services().login(_email.trim(), _password.trim());
-        if(_futureLogin != null ){
-          Navigator.pushNamed(context, DashBoard.id, arguments: {"hello sue"});
+        final Account account = await Services().login(_email.trim(), _password.trim());
+        if(account != null ){
+          final JobItemList jobs = await Services().getJob(14);
+          Navigator.pushNamed(context, DashBoard.id, arguments: jobs);
         }else{
           return Text('HHHH\nMMMMM');
         }

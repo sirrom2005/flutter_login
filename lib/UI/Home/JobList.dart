@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:login/Models/JobItem.dart';
 
 class JobListView extends StatelessWidget {
-  final Map<String, Object> jobObject;
+  final JobItem jobObject;
   
   JobListView(this.jobObject);
 
@@ -17,7 +18,7 @@ class JobListView extends StatelessWidget {
                 Material(
                   type: MaterialType.card,
                   elevation:8, 
-                  color: jobObject['active'] ? Colors.red : Colors.green,
+                  color: jobObject.complete == 1 ? Colors.red : Colors.green,
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
                     width: _width,
@@ -37,7 +38,7 @@ class JobListView extends StatelessWidget {
                           Row(
                             children: <Widget>[
                               Text(
-                                jobObject['job_id'],
+                                jobObject.jobId,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 20,
@@ -46,7 +47,7 @@ class JobListView extends StatelessWidget {
                               ),
                               Spacer(flex: 1),
                               Text(
-                                jobObject['date'],
+                                jobObject.startDate,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 20,
@@ -56,7 +57,7 @@ class JobListView extends StatelessWidget {
                             ],
                           ),
                           Text(
-                            jobObject['title'],
+                            jobObject.title,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -65,7 +66,7 @@ class JobListView extends StatelessWidget {
                             ) 
                           ),
                           Text(
-                            jobObject['address'],
+                            jobObject.customer,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 20,
@@ -82,11 +83,11 @@ class JobListView extends StatelessWidget {
                   padding: EdgeInsets.fromLTRB(15, 3, 15, 3),
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(5),
                     color: Colors.white
                   ),
                   child: Text(
-                    'HERE..',
+                    jobObject.jobType,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
